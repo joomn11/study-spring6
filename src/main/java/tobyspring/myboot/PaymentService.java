@@ -6,16 +6,14 @@ import java.time.LocalDateTime;
 
 public class PaymentService {
 
-    //    private final WebApiExRateProvider provider;
-    private final SimpleExRateProvider provider;
+    private final ExRateProvider provider;
 
     public PaymentService() {
-//        provider = new WebApiExRateProvider();
-        provider = new SimpleExRateProvider();
+        provider = new WebApiExRateProvider();
+//        provider = new SimpleExRateProvider();
     }
 
     public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException {
-//        BigDecimal exRate = provider.getWebExRate(currency);
         BigDecimal exRate = provider.getExRate(currency);
         BigDecimal convertedAmount = foreignCurrencyAmount.multiply(exRate);
         LocalDateTime validUntil = LocalDateTime.now().plusMinutes(30L);
