@@ -1,4 +1,4 @@
-package tobyspring.myboot;
+package tobyspring.myboot.exrate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
+import tobyspring.myboot.payment.ExRateProvider;
 
 //@Component
 public class WebApiExRateProvider implements ExRateProvider {

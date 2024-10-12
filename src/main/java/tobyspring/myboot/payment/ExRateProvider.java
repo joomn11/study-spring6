@@ -1,4 +1,4 @@
-package tobyspring.myboot;
+package tobyspring.myboot.payment;
 
 import java.io.IOException;
 import java.math.BigDecimal;

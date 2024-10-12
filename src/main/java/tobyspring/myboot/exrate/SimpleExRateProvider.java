@@ -1,7 +1,8 @@
-package tobyspring.myboot;
+package tobyspring.myboot.exrate;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import tobyspring.myboot.payment.ExRateProvider;
 
 public class SimpleExRateProvider implements ExRateProvider {
 

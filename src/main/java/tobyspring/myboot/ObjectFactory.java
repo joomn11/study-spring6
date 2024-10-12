@@ -2,6 +2,10 @@ package tobyspring.myboot;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import tobyspring.myboot.exrate.CachedExRateProvider;
+import tobyspring.myboot.exrate.WebApiExRateProvider;
+import tobyspring.myboot.payment.ExRateProvider;
+import tobyspring.myboot.payment.PaymentService;
 
 @Configuration
 //@ComponentScan

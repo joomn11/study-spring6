@@ -1,4 +1,4 @@
-package tobyspring.myboot;
+package tobyspring.myboot.payment;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

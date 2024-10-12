@@ -1,4 +1,4 @@
-package tobyspring.myboot;
+package tobyspring.myboot.exrate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
