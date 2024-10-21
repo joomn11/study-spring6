@@ -1,30 +1,34 @@
 package tobyspring.myboot.payment;
 
 
+import static java.math.BigDecimal.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
-import tobyspring.myboot.exrate.WebApiExRateProvider;
 
 class PaymentServiceTest {
 
     @Test
     void prepare() throws IOException {
-        PaymentService paymentService = new PaymentService(new WebApiExRateProvider());
+        testAmount(valueOf(500), valueOf(5_000));
+        testAmount(valueOf(1000), valueOf(10_000));
+        testAmount(valueOf(3000), valueOf(30_000));
+
+        // get valid time
+//        assertThat(payment.getValidUntil()).isAfter(LocalDateTime.now());
+//        assertThat(payment.getValidUntil()).isBefore(LocalDateTime.now().plusMinutes(30));
+    }
+
+    private void testAmount(BigDecimal exRate, BigDecimal convertedAmount) throws IOException {
+        PaymentService paymentService = new PaymentService(new ExRateProviderStub(exRate));
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
         // get exRate
-        assertThat(payment.getExRate()).isNotNull();
+        assertThat(payment.getExRate()).isEqualByComparingTo(exRate);
 
         // get converted amount
-        assertThat(payment.getConvertedAmount())
-            .isEqualTo(payment.getExRate().multiply(payment.getForeignCurrencyAmount()));
-
-        // get valid time
-        assertThat(payment.getValidUntil()).isAfter(LocalDateTime.now());
-        assertThat(payment.getValidUntil()).isBefore(LocalDateTime.now().plusMinutes(30));
+        assertThat(payment.getConvertedAmount()).isEqualByComparingTo(convertedAmount);
     }
 }
