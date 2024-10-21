@@ -5,6 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.BeanFactory;
@@ -13,7 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestObjectFactory.class)
+@ContextConfiguration(classes = TestPaymentConfig.class)
 class PaymentServiceSpringTest {
 
     @Autowired
@@ -23,6 +26,9 @@ class PaymentServiceSpringTest {
 
     @Autowired
     ExRateProviderStub exRateProvider;
+
+    @Autowired
+    Clock clock;
 
     @Test
     void prepare() throws IOException {
@@ -50,5 +56,13 @@ class PaymentServiceSpringTest {
 //
 //        assertThat(payment2.getExRate()).isEqualByComparingTo(BigDecimal.valueOf(500));
 //        assertThat(payment2.getConvertedAmount()).isEqualByComparingTo(BigDecimal.valueOf(5_000));
+    }
+
+    @Test
+    void validUntil() throws IOException {
+        Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
+
+        LocalDateTime now = LocalDateTime.now(clock).plusMinutes(30);
+        Assertions.assertThat(payment.getValidUntil()).isEqualTo(now);
     }
 }

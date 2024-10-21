@@ -17,7 +17,7 @@ public class Client {
 //        PaymentService service = new PaymentService(new WebApiExRateProvider());
 //        PaymentService service = new PaymentService(new SimpleExRateProvider());
 
-        BeanFactory beanFactory = new AnnotationConfigApplicationContext(ObjectFactory.class);
+        BeanFactory beanFactory = new AnnotationConfigApplicationContext(PaymentConfig.class);
         PaymentService service = beanFactory.getBean(PaymentService.class);
 
         Payment payment = service.prepare(100L, "USD", BigDecimal.valueOf(50.7));

@@ -1,5 +1,6 @@
 package tobyspring.myboot;
 
+import java.time.Clock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tobyspring.myboot.exrate.CachedExRateProvider;
@@ -9,11 +10,11 @@ import tobyspring.myboot.payment.PaymentService;
 
 @Configuration
 //@ComponentScan
-public class ObjectFactory {
+public class PaymentConfig {
 
     @Bean
     public PaymentService paymentService() {
-        return new PaymentService(cachedExRateProvider());
+        return new PaymentService(cachedExRateProvider(), clock());
     }
 
     @Bean
@@ -25,5 +26,10 @@ public class ObjectFactory {
     public ExRateProvider exRateProvider() {
 //        return new SimpleExRateProvider();
         return new WebApiExRateProvider();
+    }
+
+    @Bean
+    public Clock clock() {
+        return Clock.systemDefaultZone();
     }
 }
