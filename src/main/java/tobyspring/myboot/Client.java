@@ -1,6 +1,5 @@
 package tobyspring.myboot;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.BeanFactory;
@@ -10,7 +9,7 @@ import tobyspring.myboot.payment.PaymentService;
 
 public class Client {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
 //        ObjectFactory objectFactory = new ObjectFactory();
 //        PaymentService service = objectFactory.paymentService();
 

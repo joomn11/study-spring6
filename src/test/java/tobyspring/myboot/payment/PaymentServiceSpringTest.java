@@ -3,7 +3,6 @@ package tobyspring.myboot.payment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -31,7 +30,7 @@ class PaymentServiceSpringTest {
     Clock clock;
 
     @Test
-    void prepare() throws IOException {
+    void prepare() {
 
 //        BeanFactory beanFactory = new AnnotationConfigApplicationContext(TestObjectFactory.class);
         PaymentService paymentService = beanFactory.getBean(PaymentService.class);
@@ -44,7 +43,7 @@ class PaymentServiceSpringTest {
     }
 
     @Test
-    void prepare2() throws IOException {
+    void prepare2() {
 //        PaymentService paymentService = beanFactory.getBean(PaymentService.class);
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
@@ -59,7 +58,7 @@ class PaymentServiceSpringTest {
     }
 
     @Test
-    void validUntil() throws IOException {
+    void validUntil() {
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
         LocalDateTime now = LocalDateTime.now(clock).plusMinutes(30);
