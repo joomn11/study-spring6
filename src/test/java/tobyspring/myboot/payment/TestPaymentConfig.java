@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import tobyspring.myboot.api.ApiTemplate;
 import tobyspring.myboot.exrate.WebApiExRateProvider;
 
 @Configuration
@@ -23,9 +24,14 @@ public class TestPaymentConfig {
     }
 
     @Bean
+    public ApiTemplate apiTemplate() {
+        return new ApiTemplate();
+    }
+
+    @Bean
     public ExRateProvider exRateProvider() {
 //        return new SimpleExRateProvider();
-        return new WebApiExRateProvider();
+        return new WebApiExRateProvider(apiTemplate());
     }
 
     @Bean
