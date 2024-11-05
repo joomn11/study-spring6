@@ -24,9 +24,8 @@ public class DataClient {
                 repository.save(order);
 
                 System.out.println(order);
-
-                Order order2 = new Order("100", BigDecimal.ONE);
-                repository.save(order2);
+//                Order order2 = new Order("100", BigDecimal.ONE);
+//                repository.save(order2);
                 return null;
             });
         } catch (DataIntegrityViolationException e) {
