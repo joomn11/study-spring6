@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  version="3.1"
+  xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+  xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm
+          https://jakarta.ee/xml/ns/persistence/orm/orm_3_1.xsd">
+  <entity access="FIELD" class="tobyspring.myboot.order.Order" name="Order">
+    <attributes>
+      <basic name="no">
+        <column length="255" name="no"/>
+      </basic>
+      <basic name="total">
+        <column column-definition="number(38,2)" name="total"/>
+      </basic>
+      <id name="id">
+        <generated-value strategy="AUTO"/>
+      </id>
+    </attributes>
+    <table name="orders"/>
+  </entity>
+</entity-mappings>
