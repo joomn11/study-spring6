@@ -1,10 +1,11 @@
 package tobyspring.myboot;
 
+import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import tobyspring.myboot.data.JpaOrderRepository;
+import org.springframework.transaction.PlatformTransactionManager;
+import tobyspring.myboot.data.JdbcOrderRepository;
 import tobyspring.myboot.order.OrderRepository;
 import tobyspring.myboot.order.OrderService;
 
@@ -13,12 +14,12 @@ import tobyspring.myboot.order.OrderService;
 public class OrderConfig {
 
     @Bean
-    public OrderRepository orderRepository() {
-        return new JpaOrderRepository();
+    public OrderRepository orderRepository(DataSource ds) {
+        return new JdbcOrderRepository(ds);
     }
 
     @Bean
-    public OrderService orderService(JpaTransactionManager transactionManager) {
-        return new OrderService(orderRepository(), transactionManager);
+    public OrderService orderService(OrderRepository orderRepository, PlatformTransactionManager transactionManager) {
+        return new OrderService(orderRepository, transactionManager);
     }
 }
