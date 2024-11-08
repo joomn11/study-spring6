@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
-import tobyspring.myboot.data.OrderRepository;
+import tobyspring.myboot.data.JpaOrderRepository;
 import tobyspring.myboot.order.Order;
 
 public class DataClient {
@@ -15,7 +15,7 @@ public class DataClient {
 
         BeanFactory beanFactory = new AnnotationConfigApplicationContext(DataConfig.class);
 //        EntityManagerFactory emf = beanFactory.getBean(EntityManagerFactory.class);
-        OrderRepository repository = beanFactory.getBean(OrderRepository.class);
+        JpaOrderRepository repository = beanFactory.getBean(JpaOrderRepository.class);
         JpaTransactionManager transactionManager = beanFactory.getBean(JpaTransactionManager.class);
 
         try {
